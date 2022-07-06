@@ -1,10 +1,9 @@
-FROM python:3.8-slim-buster
-
-WORKDIR /python-docker
-
-COPY requirements.txt requirements.txt
+FROM python:3.8-alpine
+COPY ./requirements.txt /app/requirements.txt
+WORKDIR /app
 RUN pip3 install -r requirements.txt
-
-COPY . .
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+COPY . /app
+RUN chmod u+x docker.sh
+EXPOSE 5000
+ENTRYPOINT [ "python3" ]
+CMD ["app.py" ]
