@@ -1,7 +1,7 @@
-pipelineJob('Sqream Assesment') {
-  definition {
-    cpsScm {
-      scm {
+
+job('Docker Build') {
+    description("this job pulls repository from github")
+    scm {
         git {
           remote {
             url('https://github.com/Codeweaver18/sqream.git')
@@ -9,12 +9,10 @@ pipelineJob('Sqream Assesment') {
           branch('*/main')
         }
       }
-      lightweight()
-    }
+    steps {
+    shell('''
+    echo "Hello world applications"
+    ls 
+    ''')
   }
-  job('Docker Build') {
-  steps {
-    shell('echo Hello World!')
-  }
-}
 }
