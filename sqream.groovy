@@ -11,7 +11,7 @@ job('Docker Build') {
       }
     steps {
     shell('''
-    echo "Hello world applications"
+    echo "beginning docker build"
     ls 
     ''')
   }
