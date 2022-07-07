@@ -31,9 +31,17 @@ job('Nginx reverse Proxy') {
     shell('''
     Cd Nginx
     docker build -t ngnxserver .
-    Docker tag flask_docker  codeweaver/sqreamnginx:latest
+    Docker tag ngnxserver  codeweaver/sqreamnginx:latest
     docker login -u $dockerHubUsername -p $dockerHubPassword
     Docker push codeweaver/sqreamnginx:latest
+    ''')
+  }
+}
+job('Docker run containers') {
+    steps {
+    shell('''
+    docker run -p 5000:5000 -d flask_docker
+    docker run -p 80:80 -d ngnxserver
     ''')
   }
 }
